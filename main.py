@@ -81,7 +81,7 @@ def draw_boxes(image, boxes, labels, scores):
         ax.add_patch(rect)
         plt.text(x1, y1, f'{label} : {score:.2f}', 
                  bbox=dict(facecolor='yellow', alpha=0.5),
-                 fontsize=18, fontname='Arial', fontweight='bold')  # Set font properties
+                 fontsize=12, fontname='Arial', fontweight='bold')  # Set font properties
 
     plt.axis('off')
 
