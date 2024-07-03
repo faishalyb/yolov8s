@@ -77,15 +77,17 @@ def draw_boxes(image, boxes, labels, scores):
 
     for box, label, score in zip(boxes, labels, scores):
         x1, y1, x2, y2 = box
-        rect = patches.Rectangle((x1, y1), x2 - x1, y2 - y1, linewidth=2, edgecolor='r', facecolor='none')
+        rect = patches.Rectangle((x1, y1), x2 - x1, y2 - y1, linewidth=1.5, edgecolor='r', facecolor='none')
         ax.add_patch(rect)
-        plt.text(x1, y1, f'{label} : {score:.2f}', bbox=dict(facecolor='yellow', alpha=0.5))
+        plt.text(x1, y1, f'{label} : {score:.2f}', 
+                 bbox=dict(facecolor='yellow', alpha=0.5),
+                 fontsize=18, fontname='Arial', fontweight='bold')  # Set font properties
 
     plt.axis('off')
 
-    # Save the image with boxes to a BytesIO object
+    # Save the image with boxes to a BytesIO object without white background
     img_io = io.BytesIO()
-    fig.savefig(img_io, format='png')
+    fig.savefig(img_io, format='png', bbox_inches='tight', pad_inches=0, transparent=True)
     plt.close(fig)
     img_io.seek(0)
     return Image.open(img_io)
