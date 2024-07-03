@@ -3,6 +3,7 @@ from PIL import Image, ExifTags
 import io
 from ultralytics import YOLO
 import torch
+import numpy as np
 import matplotlib
 matplotlib.use('Agg')  # Use Agg backend for matplotlib
 import matplotlib.pyplot as plt
@@ -156,14 +157,13 @@ def text():
     if image_format.upper() == 'JPEG':
         img_with_boxes = img_with_boxes.convert("RGB")
 
-    # Encode image to base64
     # Prepare the JSON response
     predictions = []
     for box, label, score in zip(boxes, labels, scores):
         predictions.append({
             'label': label,
-            'score': score,
-            'box': [int(b) for b in box]  # Convert list of float to list of int
+            'score': float(score),  # Convert numpy.float32 to float
+            'box': [int(b) for b in box]  # Convert numpy.float32 to list of int
         })
 
     response = {
