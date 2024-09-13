@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "name": "modeltrained_yolov8s",
+    "builds": [
+      {
+        "src": "main.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/main.py"
+      }
+    ]
+}
+  
